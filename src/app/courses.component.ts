@@ -1,3 +1,5 @@
+import { CourseComponent } from './course/course.component';
+import { CoursesService } from './courses.service';
 
 import { Component } from '@angular/core';
 
@@ -10,11 +12,28 @@ import { Component } from '@angular/core';
                 {{course}}
             </li>
         </ul>
+        <img [src]="imageUrl" />
+        <button class="btn btn-primary" [class.active]="">save</button>
+        <button (click)="onSave()">click</button>
+        <input [(ngModel)]="name" (keyup.enter)="onKeyUp()"/>
             `
 })
 
 export class CoursesComponent{
     tittle = "List of courses";
-    courses = ["course1", "course2", "course3"];
+    inageUrl = "http://www.skamaniacoves.com/treehouse.php";
+    isActive = true;
+    onSave(){
+        alert ("button was clicked");
+    }
+    name = "Sushmita";
+    onKeyUp(){
+         alert (this.name);
+    }
+    courses;
+
+     constructor(service : CoursesService ){
+         this.courses = service.getCourses();
+     }
 }  
  
